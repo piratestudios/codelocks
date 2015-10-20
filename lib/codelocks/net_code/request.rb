@@ -2,17 +2,6 @@ module Codelocks
   module NetCode
     class Request
       class << self
-        # The default params used in NetCode endpoint requests
-        #
-        # @return [Hash]
-
-        def default_params
-          {
-            user_key: Codelocks.api_key,
-            pid: Codelocks.pairing_id,
-          }
-        end
-
         # Perform a request against the NetCode API
         #
         # @param [String] path the URI path to perform the request against
@@ -26,6 +15,18 @@ module Codelocks
         def create(path, params = {})
           response = Codelocks.connection.get(path, default_params.merge(params))
           Response.new(response)
+        end
+
+        private
+        # The default params used in NetCode endpoint requests
+        #
+        # @return [Hash]
+
+        def default_params
+          {
+            user_key: Codelocks.api_key,
+            pid: Codelocks.pairing_id,
+          }
         end
       end
     end
