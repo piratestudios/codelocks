@@ -1,6 +1,6 @@
 # Codelocks
 
-TODO: Write a gem description
+A simple gem to wrap the Codelocks NetCode API, for generating key codes to operate their physical locks.
 
 ## Installation
 
@@ -20,7 +20,21 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Configure your API credentials, either by setting the following two environment variables:
+
+```
+CODELOCKS_API_KEY
+CODELOCKS_PAIRING_ID
+```
+
+Or by setting them directly in Ruby:
+
+```ruby
+Codelocks.api_key = "blargh"
+Codelocks.pairing_id = "argh"
+```
+
+API documentation with information on methods is [available on RubyDoc.info](http://www.rubydoc.info/github/kansohq/codelocks/master).
 
 ## Contributing
 
