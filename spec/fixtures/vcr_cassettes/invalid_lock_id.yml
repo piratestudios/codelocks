@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api-2445581366752.apicast.io/api/v3/netcode/ncgenerator/getnetcode?user_key=wibble&pid=wobble&id=Ninvalid&sd=20%2F10%2F2015&st=17&du=0
+    uri: https://api-2445581366752.apicast.io/api/v3/netcode/ncgenerator/getnetcode?user_key=<%= ENV['CODELOCKS_API_KEY'] || "wibble" %>&pid=<%= ENV['CODELOCKS_PAIRING_ID'] || "wobble" %>&id=Ninvalid&sd=20%2F10%2F2015&st=17&du=0
     body:
       encoding: US-ASCII
       string: ''
