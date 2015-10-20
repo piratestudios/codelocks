@@ -17,7 +17,7 @@ describe Codelocks::NetCode do
       let(:lock_id) { ENV['CODELOCKS_LOCK_ID'] || "valid" }
 
       around(:each) do |example|
-        VCR.use_cassette("valid_lock_id", erb: true) do
+        VCR.use_cassette("valid_lock_id", erb: true, match_requests_on: [:method]) do
           example.run
         end
       end
@@ -45,7 +45,7 @@ describe Codelocks::NetCode do
       let(:lock_id) { "invalid" }
 
       around(:each) do |example|
-        VCR.use_cassette("invalid_lock_id", erb: true) do
+        VCR.use_cassette("invalid_lock_id", erb: true, match_requests_on: [:method]) do
           example.run
         end
       end
