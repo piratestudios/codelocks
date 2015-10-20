@@ -8,8 +8,13 @@ describe Codelocks::NetCode do
 
     subject { Codelocks::NetCode.generate_netcode(lock_id: lock_id, start_time: start_time, duration: duration) }
 
+    before do
+      Codelocks.api_key = ENV['CODELOCKS_API_KEY'] || "wibble"
+      Codelocks.pairing_id = ENV['CODELOCKS_PAIRING_ID'] || "wobble"
+    end
+
     context "valid lock ID" do
-      let(:lock_id) { ENV['CODELOCKS_LOCK_ID'] }
+      let(:lock_id) { ENV['CODELOCKS_LOCK_ID'] || "valid" }
 
       around(:each) do |example|
         VCR.use_cassette("valid_lock_id") do
@@ -37,7 +42,7 @@ describe Codelocks::NetCode do
     end
 
     context "invalid lock ID" do
-      let(:lock_id) { "wibble" }
+      let(:lock_id) { "invalid" }
 
       around(:each) do |example|
         VCR.use_cassette("invalid_lock_id") do
