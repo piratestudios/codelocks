@@ -24,7 +24,7 @@ module Codelocks
     # @return [String] the API key
 
     def api_key
-      @api_key || (raise CodelocksError.new("No API key specified"))
+      @api_key || ENV['CODELOCKS_API_KEY'] || (raise CodelocksError.new("No API key specified"))
     end
 
     # Return the configured pairing ID or raise an exception
@@ -32,7 +32,7 @@ module Codelocks
     # @return [String] the pairing ID
 
     def pairing_id
-      @pairing_id || (raise CodelocksError.new("No pairing ID specified"))
+      @pairing_id || ENV['CODELOCKS_PAIRING_ID'] || (raise CodelocksError.new("No pairing ID specified"))
     end
 
     # Faraday connection object

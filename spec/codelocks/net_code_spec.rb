@@ -1,0 +1,59 @@
+require "spec_helper"
+
+describe Codelocks::NetCode do
+  describe "#generate_netcode" do
+    let(:lock_id) { nil }
+    let(:start_time) { Time.now }
+    let(:duration) { 1 }
+
+    subject { Codelocks::NetCode.generate_netcode(lock_id: lock_id, start_time: start_time, duration: duration) }
+
+    context "valid lock ID" do
+      let(:lock_id) { ENV['CODELOCKS_LOCK_ID'] }
+
+      around(:each) do |example|
+        VCR.use_cassette("valid_lock_id") do
+          example.run
+        end
+      end
+
+      it { is_expected.to be_a(Codelocks::NetCode::Response) }
+
+      it "is successful" do
+        expect(subject.success?).to be true
+      end
+
+      it "returns a valid netcode" do
+        expect(subject.netcode).to be_a(String)
+      end
+
+      it "returns a valid starttime" do
+        expect(subject.starttime).to be_a(String)
+      end
+
+      it "doesn't return an error" do
+        expect(subject.error).to be nil
+      end
+    end
+
+    context "invalid lock ID" do
+      let(:lock_id) { "wibble" }
+
+      around(:each) do |example|
+        VCR.use_cassette("invalid_lock_id") do
+          example.run
+        end
+      end
+
+      it { is_expected.to be_a(Codelocks::NetCode::Response) }
+
+      it "returns an error" do
+        expect(subject.error).to be_a(String)
+      end
+
+      it "returns an error message" do
+        expect(subject.message).to be_a(String)
+      end
+    end
+  end
+end

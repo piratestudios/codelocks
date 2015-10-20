@@ -36,7 +36,7 @@ module Codelocks
       # @return [String] the raw returned string from the API
 
       def method_missing(method_name, *opts, &block)
-        body[method_name.to_s] || super(method_name, *opts, &block)
+        body[method_name.to_s]
       end
     end
   end

@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api-2445581366752.apicast.io/api/v3/netcode/ncgenerator/getnetcode?user_key=<API_KEY>&pid=<PAIRING_ID>&id=N106758&sd=20%2F10%2F2015&st=16&du=0
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.8.11
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      cache-control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      content-type:
+      - application/json
+      date:
+      - Tue, 20 Oct 2015 15:59:51 GMT
+      expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      pragma:
+      - no-cache
+      server:
+      - openresty/1.5.11.1
+      set-cookie:
+      - cpt=716a9ac4788a9626ed88c88ea9c2e9355efb55b4; expires=Tue, 20-Oct-2015 18:00:04
+        GMT; path=/; HttpOnly
+      x-powered-by:
+      - ASP.NET, 3scale API Management - http://www.3scale.net
+      content-length:
+      - '53'
+      connection:
+      - Close
+    body:
+      encoding: UTF-8
+      string: '{"netcode":"087246","starttime":"2015\/10\/20\/16:0"}'
+    http_version: 
+  recorded_at: Tue, 20 Oct 2015 15:59:51 GMT
+recorded_with: VCR 2.9.3
