@@ -1,7 +1,5 @@
 module Codelocks
   module NetCode
-    class NetCodeError < CodelocksError; end
-
     class << self
       # Predefined method for generating a new NetCode
       #
@@ -13,7 +11,7 @@ module Codelocks
 
       def generate_netcode(lock_id: nil, start_time: Time.now, duration: nil)
         Request.create("netcode/ncgenerator/getnetcode", {
-          id: lock_id,
+          id: "N#{lock_id}",
           sd: start_time.strftime("%d/%m/%Y"),
           st: start_time.strftime("%H"),
           du: convert_duration(duration)
