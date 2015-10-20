@@ -1,5 +1,7 @@
 # Codelocks
 
+[![Circle CI](https://circleci.com/gh/kansohq/codelocks.svg?style=svg)](https://circleci.com/gh/kansohq/codelocks)
+
 A simple gem to wrap the Codelocks NetCode API, for generating key codes to operate their physical locks.
 
 ## Installation
