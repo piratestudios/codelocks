@@ -25,4 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "dotenv", "~> 2.0"
 
   spec.add_dependency "faraday", "~> 0.8.11"
+
+  spec.required_ruby_version = "~> 2.2"
 end

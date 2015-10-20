@@ -9,4 +9,5 @@ VCR.configure do |config|
   config.hook_into :faraday
   config.filter_sensitive_data("<API_KEY>") { Codelocks.api_key }
   config.filter_sensitive_data("<PAIRING_ID>") { Codelocks.pairing_id }
+  config.filter_sensitive_data("<LOCK_ID>") { ENV['CODELOCKS_LOCK_ID'] }
 end
