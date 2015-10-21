@@ -61,4 +61,17 @@ describe Codelocks::NetCode do
       end
     end
   end
+
+  describe '#convert_duration' do
+    subject { Codelocks::NetCode.send(:convert_duration, duration) }
+    let(:duration) { rand(0..1000) }
+
+    it "doesn't return an error" do
+      expect(subject).not_to raise_error
+    end
+
+    it "returns an integer" do
+      expect(subject).to be_a(Integer)
+    end
+  end
 end
