@@ -67,7 +67,7 @@ describe Codelocks::NetCode do
     let(:duration) { rand(0..1000) }
 
     it "doesn't return an error" do
-      expect(subject).not_to raise_error
+      expect { subject }.not_to raise_error
     end
 
     it "returns an integer" do
