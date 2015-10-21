@@ -32,19 +32,19 @@ module Codelocks
           duration
         when duration <= 12 # less than 13 hours
           duration -1
-        when 13..24.include?(duration) # 1 day
+        when (13..24).include?(duration) # 1 day
           12
-        when 25..48.include?(duration) # 2 days
+        when (25..48).include?(duration) # 2 days
           13
-        when 49..72.include?(duration) # 3 days
+        when (49..72).include?(duration) # 3 days
           14
-        when 73..96.include?(duration) # 4 days
+        when (73..96).include?(duration) # 4 days
           15
-        when 97..120.include?(duration) # 5 days
+        when (97..120).include?(duration) # 5 days
           16
-        when 121..144.include?(duration) # 6 days
+        when (121..144).include?(duration) # 6 days
           17
-        when 145..168.include?(duration) # 7 days
+        when (145..168).include?(duration) # 7 days
           18
         when duration > 168 # more than 7 days, generates a URM code
           19
