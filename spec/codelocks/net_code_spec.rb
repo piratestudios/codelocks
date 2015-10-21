@@ -64,7 +64,7 @@ describe Codelocks::NetCode do
 
   describe '#convert_duration' do
     subject { Codelocks::NetCode.send(:convert_duration, duration) }
-    let(:duration) { rand(0..1000) }
+    let(:duration) { rand(0..169) }
 
     it "doesn't return an error" do
       expect { subject }.not_to raise_error
