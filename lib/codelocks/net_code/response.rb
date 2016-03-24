@@ -1,7 +1,7 @@
 require "json"
 
 module Codelocks
-  module NetCode
+  class NetCode
     class Response
       attr_reader :response
 

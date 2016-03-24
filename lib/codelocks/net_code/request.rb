@@ -1,5 +1,5 @@
 module Codelocks
-  module NetCode
+  class NetCode
     class Request
       class << self
         # Perform a request against the NetCode API
