@@ -4,7 +4,21 @@ describe Codelocks do
   describe "#base_uri" do
     subject { Codelocks.base_uri }
 
-    it { is_expected.to be_a(String) }
+    before { allow(ENV).to receive(:[]) { nil } }
+
+    context "is present" do
+      before { Codelocks.base_uri = "test" }
+
+      it { is_expected.to eq("test") }
+    end
+
+    context "is not present" do
+      before { Codelocks.base_uri = nil }
+
+      it "raises an exception" do
+        expect { subject }.to raise_error(Codelocks::CodelocksError)
+      end
+    end
   end
 
   describe "#api_key" do
@@ -27,25 +41,24 @@ describe Codelocks do
     end
   end
 
-  describe "#pairing_id" do
-    subject { Codelocks.pairing_id }
+  describe "#access_key" do
+    subject { Codelocks.access_key }
 
     before { allow(ENV).to receive(:[]) { nil } }
 
     context "is present" do
-      before { Codelocks.pairing_id = "test" }
+      before { Codelocks.access_key = "test" }
 
       it { is_expected.to eq("test") }
     end
 
     context "is not present" do
-      before { Codelocks.pairing_id = nil }
+      before { Codelocks.access_key = nil }
 
-      it "raises an exception" do
-        expect { subject }.to raise_error(Codelocks::CodelocksError)
-      end
+      it { is_expected.to eq(nil) }
     end
   end
+
 
   describe "#connection" do
     subject { Codelocks.connection }

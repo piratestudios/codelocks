@@ -13,7 +13,10 @@ module Codelocks
         # @return [Codelocks::NetCode::Response]
 
         def create(path, params = {})
-          response = Codelocks.connection.get(path, default_params.merge(params))
+          response = Codelocks.connection.get(path, default_params.merge(params)) do |req|
+            req.headers['x-api-key'] = Codelocks.api_key
+          end
+
           Response.new(response)
         end
 
@@ -23,10 +26,7 @@ module Codelocks
         # @return [Hash]
 
         def default_params
-          {
-            user_key: Codelocks.api_key,
-            pid: Codelocks.pairing_id,
-          }
+          {}
         end
       end
     end

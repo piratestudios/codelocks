@@ -2,27 +2,23 @@ require "spec_helper"
 
 describe Codelocks::NetCode::Request do
   before do
+    Codelocks.base_uri = "http://wobble.com/"
     Codelocks.api_key = "wibble"
-    Codelocks.pairing_id = "wobble"
   end
 
   describe "#create" do
-    let(:response) { double('faraday_response') }
-    let(:path) { "netcode/ncgenerator/getnetcode" }
     let(:params) do
-      {
-        id: "lock"
-      }
+      { id: "lock" }
     end
 
     let(:default_params) do
-      {
-        api_key: "wibble",
-        pairing_id: "wobble"
-      }
+      {}
     end
 
     let(:all_params) { default_params.merge(params) }
+
+    let(:response) { double('faraday_response') }
+    let(:path) { "netcode/#{params[:id]}" }
 
     before do
       allow(Codelocks.connection).to receive(:get) { response }
