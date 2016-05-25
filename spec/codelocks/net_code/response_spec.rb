@@ -5,8 +5,8 @@ describe Codelocks::NetCode::Response do
   let(:faraday_response) { double('faraday_response', success?: true, body: '{"test": "thing"}') }
 
   before do
+    Codelocks.base_uri = "http://wobble.com/"
     Codelocks.api_key = "wibble"
-    Codelocks.pairing_id = "wobble"
   end
 
   describe "#initialize" do

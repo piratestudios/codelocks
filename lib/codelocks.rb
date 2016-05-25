@@ -9,14 +9,14 @@ module Codelocks
   class CodelocksError < StandardError; end
 
   class << self
-    attr_writer :api_key, :pairing_id
+    attr_writer :base_uri, :api_key, :access_key
 
     # The base URI used for API request
     #
     # @return [String] the base URI
 
     def base_uri
-      "https://api-2445581366752.apicast.io/api/v3"
+      @base_uri || ENV['CODELOCKS_BASE_URI'] || (raise CodelocksError.new("No base URI specified"))
     end
 
     # Return the configured API key or raise an exception
@@ -27,12 +27,13 @@ module Codelocks
       @api_key || ENV['CODELOCKS_API_KEY'] || (raise CodelocksError.new("No API key specified"))
     end
 
-    # Return the configured pairing ID or raise an exception
+    # Return the access key. This is tied to the K3 Connect App.
+    # This can be nil, as for certain models of locks you will provide a 6 digit ID instead.
     #
-    # @return [String] the pairing ID
+    # @return [String] the access key
 
-    def pairing_id
-      @pairing_id || ENV['CODELOCKS_PAIRING_ID'] || (raise CodelocksError.new("No pairing ID specified"))
+    def access_key
+      @access_key || ENV['CODELOCKS_ACCESS_KEY']
     end
 
     # Faraday connection object
