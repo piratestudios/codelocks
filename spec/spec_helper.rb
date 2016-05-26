@@ -3,6 +3,7 @@ Dotenv.load
 
 require "codelocks"
 require "vcr"
+require "pry"
 
 VCR.configure do |config|
   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
