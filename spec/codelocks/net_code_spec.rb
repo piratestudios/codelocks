@@ -30,15 +30,15 @@ describe Codelocks::NetCode do
       end
 
       it "returns a valid netcode" do
-        expect(subject.netcode).to be_a(String)
+        expect(subject.ActualNetcode).to be_a(String)
       end
 
       it "returns a valid starttime" do
-        expect(subject.starttime).to be_a(String)
+        expect(subject.Startdate).to be_a(String)
       end
 
       it "doesn't return an error" do
-        expect(subject.error).to be nil
+        expect(subject.error_message).to be nil
       end
     end
 
@@ -53,12 +53,8 @@ describe Codelocks::NetCode do
 
       it { is_expected.to be_a(Codelocks::Response) }
 
-      it "returns an error" do
-        expect(subject.error).to be_a(String)
-      end
-
       it "returns an error message" do
-        expect(subject.message).to be_a(String)
+        expect(subject.error_message).to be_a(String)
       end
     end
   end
@@ -69,11 +65,6 @@ describe Codelocks::NetCode do
   let(:urm) { false }
 
   subject(:netcode) { Codelocks::NetCode.new(lock_id: lock_id, start: start, duration: duration, urm: urm) }
-
-  describe "#lock_id" do
-    subject { netcode.lock_id }
-    it { is_expected.to eq "N001" }
-  end
 
   describe "#start_date" do
     subject { netcode.start_date }

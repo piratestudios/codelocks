@@ -4,9 +4,11 @@ module Codelocks
       # Predefined method for generating a new NetCode
       #
       # @option [String] :lock_id The lock identifier
-      # @option [Time] :start_time (Time.now) The start datetime object
+      # @option [String] :lock_model The type of lock
+      # @option [Time] :start (Time.now) The start datetime object
       # @option [Integer] :duration The number of hours the generated code should be valid for from the start_time
       # @option [Boolean] :urm Generate an URM code
+      # @option [String] :identifier The access key or lock identifier
       #
       # @return [Codelocks::NetCode::Response]
 
@@ -19,7 +21,7 @@ module Codelocks
 
         Request.create("netcode/#{netcode.lock_id}",
           "id": netcode.lock_id,
-          "start": netcode.start_time,
+          "start": netcode.start_datetime,
           "duration": netcode.duration_id,
           "lockmodel": netcode.lock_model,
           "identifier": netcode.identifier
@@ -31,7 +33,7 @@ module Codelocks
 
     def initialize(opts = {})
       self.opts = {
-        lock_model: nil,
+        lock_model: nil || "K3CONNECT",
         lock_id: nil,
         start: Time.now,
         duration: 0,
@@ -43,14 +45,6 @@ module Codelocks
     def method_missing(method, *args, &block)
       return opts[method] if opts.include?(method)
       super
-    end
-
-    # NetCode lock identifier
-    #
-    # @return [String]
-
-    def lock_id
-      "N#{opts[:lock_id]}"
     end
 
     # Return either a supplied identifier or the predefined access key
