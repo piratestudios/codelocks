@@ -1,6 +1,6 @@
 # Codelocks
 
-[![Circle CI](https://circleci.com/gh/kansohq/codelocks.svg?style=svg)](https://circleci.com/gh/kansohq/codelocks) [![Gem Version](https://badge.fury.io/rb/codelocks.svg)](https://badge.fury.io/rb/codelocks)
+[![Gem Version](https://badge.fury.io/rb/codelocks.svg)](https://badge.fury.io/rb/codelocks)
 
 A simple gem to wrap the Codelocks NetCode API, for generating key codes to operate their physical locks.
 
