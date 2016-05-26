@@ -4,10 +4,7 @@ module Codelocks
       # Perform a request against the NetCode API
       #
       # @param [String] path the URI path to perform the request against
-      # @param [Hash] params
-      # @option params [String] :sd The start date in format dd/mm/yyyy
-      # @option params [String] :st The start time, 0 spaced: 00-23
-      # @option params [Integer] :duration The duration for the code to be valid for
+      # @param [Hash] params defined in Codelocks::NetCode
       #
       # @return [Codelocks::NetCode::Response]
 
