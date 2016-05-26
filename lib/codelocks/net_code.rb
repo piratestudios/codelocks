@@ -4,11 +4,11 @@ module Codelocks
       # Predefined method for generating a new NetCode
       #
       # @option [String] :lock_id The lock identifier
-      # @option [String] :lock_model The type of lock
+      # @option [String] :lock_model (K3CONNECT) The type of lock
       # @option [Time] :start (Time.now) The start datetime object
-      # @option [Integer] :duration The number of hours the generated code should be valid for from the start_time
-      # @option [Boolean] :urm Generate an URM code
-      # @option [String] :identifier The access key or lock identifier
+      # @option [Integer] :duration (0) The number of hours the generated code should be valid for from the start_time
+      # @option [Boolean] :urm (false) Generate an URM code
+      # @option [String] :identifier (Codelocks.access_key) The access key or lock identifier
       #
       # @return [Codelocks::NetCode::Response]
 
