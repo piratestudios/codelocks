@@ -10,7 +10,6 @@ module Codelocks
           raise CodelocksError.new("An access key must be provided")
         end
 
-        #TODO: Move request/response models
         Request.create("lock",
           "accesskey": Codelocks.access_key
         )
