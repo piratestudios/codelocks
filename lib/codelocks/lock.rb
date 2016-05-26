@@ -5,7 +5,7 @@ module Codelocks
       #
       # @return [Codelocks::NetCode::Response]
 
-      def all(opts = {})
+      def all
         if !Codelocks.access_key
           raise CodelocksError.new("An access key must be provided")
         end
