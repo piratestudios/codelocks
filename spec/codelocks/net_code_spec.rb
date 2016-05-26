@@ -23,7 +23,7 @@ describe Codelocks::NetCode do
         end
       end
 
-      it { is_expected.to be_a(Codelocks::NetCode::Response) }
+      it { is_expected.to be_a(Codelocks::Response) }
 
       it "is successful" do
         expect(subject.success?).to be true
@@ -51,7 +51,7 @@ describe Codelocks::NetCode do
         end
       end
 
-      it { is_expected.to be_a(Codelocks::NetCode::Response) }
+      it { is_expected.to be_a(Codelocks::Response) }
 
       it "returns an error" do
         expect(subject.error).to be_a(String)

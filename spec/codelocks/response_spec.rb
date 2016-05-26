@@ -1,7 +1,7 @@
 require "spec_helper"
 
-describe Codelocks::NetCode::Response do
-  let(:response) { Codelocks::NetCode::Response.new(faraday_response) }
+describe Codelocks::Response do
+  let(:response) { Codelocks::Response.new(faraday_response) }
   let(:faraday_response) { double('faraday_response', success?: true, body: '{"test": "thing"}') }
 
   before do
@@ -33,18 +33,11 @@ describe Codelocks::NetCode::Response do
 
   describe "#body" do
     subject { response.body }
+    it { is_expected.to be_a(Hash) }
+  end
 
-    context "success? is true" do
-      before { allow(faraday_response).to receive(:success?) { true } }
-
-      it { is_expected.to be_a(Hash) }
-    end
-
-    context "success? is false" do
-      before { allow(faraday_response).to receive(:success?) { false } }
-
-      it { is_expected.to be nil }
-    end
+  describe "#error_message" do
+    #TODO
   end
 
   describe "#method_missing" do

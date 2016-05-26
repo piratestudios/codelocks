@@ -1,9 +1,10 @@
 require "faraday"
 
 require "codelocks/version"
+require "codelocks/request"
+require "codelocks/response"
+require "codelocks/lock"
 require "codelocks/net_code"
-require "codelocks/net_code/request"
-require "codelocks/net_code/response"
 
 module Codelocks
   class CodelocksError < StandardError; end
