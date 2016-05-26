@@ -2,42 +2,39 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api-2445581366752.apicast.io/api/v3/netcode/ncgenerator/getnetcode?user_key=<%= ENV['CODELOCKS_API_KEY'] || "wibble" %>&pid=<%= ENV['CODELOCKS_PAIRING_ID'] || "wobble" %>&id=N<%= ENV['CODELOCKS_LOCK_ID'] || "valid" %>&sd=20%2F10%2F2015&st=17&du=0
+    uri: "<BASE_URI>/netcode/LOCK_ID?id=LOCK_ID&start=2016-05-26+14%3A22&duration=0&lockmodel=K3CONNECT&identifier=<ACCESS_KEY>"
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
       - Faraday v0.8.11
+      x-api-key:
+      - "<API_KEY>"
   response:
     status:
       code: 200
       message: 
     headers:
-      cache-control:
-      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
       content-type:
       - application/json
-      date:
-      - Tue, 20 Oct 2015 16:08:05 GMT
-      expires:
-      - Thu, 19 Nov 1981 08:52:00 GMT
-      pragma:
-      - no-cache
-      server:
-      - openresty/1.5.11.1
-      set-cookie:
-      - cpt=30457e50b3e443bcd1407f77f7b39d71df699388; expires=Tue, 20-Oct-2015 18:08:19
-        GMT; path=/; HttpOnly
-      x-powered-by:
-      - ASP.NET, 3scale API Management - http://www.3scale.net
       content-length:
-      - '53'
+      - '213'
       connection:
-      - Close
+      - close
+      date:
+      - Thu, 26 May 2016 13:22:19 GMT
+      x-amzn-requestid:
+      - dea40c96-2344-11e6-bba4-25d390521298
+      x-cache:
+      - Miss from cloudfront
+      via:
+      - 1.1 968f3ab48a1dd74b47de55452b46203d.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - irPt9j9LX0JKOdnk809FtOnBaEdgV-oyvUxJRxbBmQuprkmDVkSTDA==
     body:
       encoding: UTF-8
-      string: '{"netcode":"000000","starttime":"2015\/10\/20\/17:0"}'
+      string: '{"Startdate":"2016-05-26T14:00:00","DurationHours":1,"DurationDays":0,"Mode":"standard","SubMode":"alltime","Timecode":null,"ActualNetcode":"178627","Resultstatus":null,"LockId":"LOCK_ID"}'
     http_version: 
-  recorded_at: Tue, 20 Oct 2015 16:08:05 GMT
+  recorded_at: Thu, 26 May 2016 13:22:19 GMT
 recorded_with: VCR 2.9.3

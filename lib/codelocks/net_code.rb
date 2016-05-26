@@ -4,59 +4,83 @@ module Codelocks
       # Predefined method for generating a new NetCode
       #
       # @option [String] :lock_id The lock identifier
-      # @option [Time] :start_time (Time.now) The start datetime object
-      # @option [Integer] :duration The number of hours the generated code should be valid for from the start_time
-      # @option [Boolean] :urm Generate an URM code
+      # @option [String] :lock_model (K3CONNECT) The type of lock
+      # @option [Time] :start (Time.now) The start datetime object
+      # @option [Integer] :duration (0) The number of hours the generated code should be valid for from the start_time
+      # @option [Boolean] :urm (false) Generate an URM code
+      # @option [String] :identifier (Codelocks.access_key) The access key or lock identifier
       #
       # @return [Codelocks::NetCode::Response]
 
-      def generate_netcode(lock_id: nil, start_time: Time.now, duration: 0, urm: false)
-        netcode = new(lock_id, start_time, duration, urm)
+      def generate_netcode(opts = {})
+        netcode = new(opts)
 
-        Request.create("netcode/ncgenerator/getnetcode",
-          id: netcode.lock_id,
-          sd: netcode.start_date,
-          st: netcode.start_time,
-          du: netcode.duration_id
+        if !netcode.identifier
+          raise CodelocksError.new("Either a lock identifier or an access key must be provided")
+        end
+
+        Request.create("netcode/#{netcode.lock_id}",
+          "id": netcode.lock_id,
+          "start": netcode.start_datetime,
+          "duration": netcode.duration_id,
+          "lockmodel": netcode.lock_model,
+          "identifier": netcode.identifier
         )
       end
     end
 
-    attr_accessor :lock, :start, :duration
+    attr_accessor :opts
 
-    def initialize(lock, start, duration, urm)
-      @lock = lock
-      @start = start
-      @duration = duration
-      @urm = urm
+    def initialize(opts = {})
+      self.opts = {
+        lock_model: nil || "K3CONNECT",
+        lock_id: nil,
+        start: Time.now,
+        duration: 0,
+        urm: false,
+        identifier: nil
+      }.merge(opts)
     end
 
-    # NetCode lock identifier
+    def method_missing(method, *args, &block)
+      return opts[method] if opts.include?(method)
+      super
+    end
+
+    # Return either a supplied identifier or the predefined access key
     #
     # @return [String]
 
-    def lock_id
-      "N#{lock}"
+    def identifier
+      opts[:identifier] || Codelocks.access_key
     end
 
-    # String representing the start date in DD/MM/YYYY format
+    # String representing the start date in YYYY-MM-DD format
     #
     # @return [String]
 
     def start_date
-      start.strftime("%d/%m/%Y")
+      start.strftime("%Y-%m-%d")
     end
 
-    # String representing the start time hour with leading zero
+    # String representing the start time. Hour has a leading zero
     #
     # @return [String]
 
     def start_time
       if urm? && duration_id >= 31 # URM enabled and >= 24 hours duration
-        '00'
+        "00:00"
       else
-        start.strftime("%H")
+        start.strftime("%H:%M")
       end
+    end
+
+    # Full date time formatted for API use
+    #
+    # @return [String]
+
+    def start_datetime
+      [start_date, start_time].join(" ")
     end
 
     # NetCode duration ID
@@ -72,7 +96,7 @@ module Codelocks
     # @return [Boolean]
 
     def urm?
-      @urm
+      !!urm
     end
 
     private
