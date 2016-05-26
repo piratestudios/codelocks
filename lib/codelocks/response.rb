@@ -36,6 +36,8 @@ module Codelocks
       if !success?
         body["Message"]
       end
+    rescue JSON::ParserError => ex
+      ex.message
     end
 
     # Simple method missing accessor for reading returned attributes
@@ -43,7 +45,7 @@ module Codelocks
     # @return [String] the raw returned string from the API
 
     def method_missing(method_name, *opts, &block)
-      body[method_name.to_s]
+      body[method_name.to_s] if body.is_a?(Hash)
     end
   end
 end
