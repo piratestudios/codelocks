@@ -35,11 +35,11 @@ module Codelocks
       self.opts = {
         lock_model: nil || "K3CONNECT",
         lock_id: nil,
-        start: Time.now,
+        start: nil,
         duration: 0,
         urm: false,
         identifier: nil
-      }.merge(opts)
+      }.merge!(opts)
     end
 
     def method_missing(method, *args, &block)
