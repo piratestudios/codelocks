@@ -33,7 +33,6 @@ module Codelocks
 
     def initialize(opts = {})
       self.opts = {
-        url_id: nil,
         lock_model: nil || "K3CONNECT",
         lock_id: nil,
         start: nil,
