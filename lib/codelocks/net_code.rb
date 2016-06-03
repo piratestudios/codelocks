@@ -19,6 +19,8 @@ module Codelocks
           raise CodelocksError.new("Either a lock identifier or an access key must be provided")
         end
 
+        p netcode.inspect
+
         Request.create("netcode/#{netcode.lock_id}",
           "id": netcode.lock_id,
           "start": netcode.start_datetime,
@@ -36,7 +38,7 @@ module Codelocks
         url_id: nil,
         lock_model: nil || "K3CONNECT",
         lock_id: nil,
-        start: Time.now,
+        start: nil,
         duration: 0,
         urm: false,
         identifier: nil
