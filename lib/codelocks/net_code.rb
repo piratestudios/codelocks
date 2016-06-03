@@ -39,7 +39,7 @@ module Codelocks
         duration: 0,
         urm: false,
         identifier: nil
-      }.merge(opts)
+      }.merge!(opts)
     end
 
     def method_missing(method, *args, &block)
