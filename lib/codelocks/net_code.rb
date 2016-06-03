@@ -19,8 +19,6 @@ module Codelocks
           raise CodelocksError.new("Either a lock identifier or an access key must be provided")
         end
 
-        p netcode.inspect
-
         Request.create("netcode/#{netcode.lock_id}",
           "id": netcode.lock_id,
           "start": netcode.start_datetime,
