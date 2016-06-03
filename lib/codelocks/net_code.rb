@@ -3,6 +3,7 @@ module Codelocks
     class << self
       # Predefined method for generating a new NetCode
       #
+      # @option [String] :url_id The ID used in the request URL, varies by lock model
       # @option [String] :lock_id The lock identifier
       # @option [String] :lock_model (K3CONNECT) The type of lock
       # @option [Time] :start (Time.now) The start datetime object
@@ -19,7 +20,7 @@ module Codelocks
           raise CodelocksError.new("Either a lock identifier or an access key must be provided")
         end
 
-        Request.create("netcode/#{netcode.lock_id}",
+        Request.create("netcode/#{netcode.url_id}",
           "id": netcode.lock_id,
           "start": netcode.start_datetime,
           "duration": netcode.duration_id,
@@ -33,6 +34,7 @@ module Codelocks
 
     def initialize(opts = {})
       self.opts = {
+        url_id: nil,
         lock_model: nil || "K3CONNECT",
         lock_id: nil,
         start: Time.now,
