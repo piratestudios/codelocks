@@ -60,7 +60,7 @@ module Codelocks
     # @return [String]
 
     def start_date
-      start.strftime("%Y-%m-%d")
+      start.strftime("%Y-%m-%d") unless start.nil?
     end
 
     # String representing the start time. Hour has a leading zero
@@ -71,7 +71,7 @@ module Codelocks
       if urm? && duration_id >= 31 # URM enabled and >= 24 hours duration
         "00:00"
       else
-        start.strftime("%H:%M")
+        start.strftime("%H:%M") unless start.nil? unless start.nil? unless start.nil? unless start.nil?
       end
     end
 
@@ -88,7 +88,11 @@ module Codelocks
     # @return [Integer]
 
     def duration_id
-      base_duration + urm_offset
+      if urm?
+        urm_duration
+      else
+        base_duration
+      end
     end
 
     # Are URM codes enabled?
@@ -128,16 +132,12 @@ module Codelocks
       end
     end
 
-    # Convert a URM enabled boolean to a NetCode duration offset
+    # Return the duration used for URM requests
     #
     # @return [Integer]
 
-    def urm_offset
-      if urm?
-        19
-      else
-        0
-      end
+    def urm_duration
+      37
     end
   end
 end
