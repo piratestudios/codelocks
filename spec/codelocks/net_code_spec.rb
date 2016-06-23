@@ -139,26 +139,26 @@ describe Codelocks::NetCode do
       let(:urm) { true }
 
       context "zero duration" do
-        it "return 19" do
+        it "returns 37" do
           allow(netcode).to receive(:duration) { 0 }
-          expect(netcode.duration_id).to eq 19
+          expect(netcode.duration_id).to eq 37
         end
       end
 
       context "up to half a day" do
-        it "returns 19 minus one from the duration" do
+        it "returns 37" do
           (1..12).each do |i|
             allow(netcode).to receive(:duration) { i }
-            expect(netcode.duration_id).to eq 19 + i - 1
+            expect(netcode.duration_id).to eq 37
           end
         end
       end
 
       context "whole days" do
-        it "returns number of days counting from 30" do
+        it "returns 37" do
           (1..7).each do |i|
             allow(netcode).to receive(:duration) { i * 24 }
-            expect(netcode.duration_id).to eq 19 + 11 + i
+            expect(netcode.duration_id).to eq 37
           end
         end
       end
@@ -166,7 +166,7 @@ describe Codelocks::NetCode do
       context "over 7 days" do
         it "returns 37" do
           allow(netcode).to receive(:duration) { 8 * 24 }
-          expect(netcode.duration_id).to eq 19 + 18
+          expect(netcode.duration_id).to eq 37
         end
       end
     end
