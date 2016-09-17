@@ -71,7 +71,7 @@ module Codelocks
       if urm? && duration_id >= 31 # URM enabled and >= 24 hours duration
         "00:00"
       else
-        start.strftime("%H:%M") unless start.nil? unless start.nil? unless start.nil? unless start.nil?
+        start.strftime("%H:%M") unless start.nil?
       end
     end
 
