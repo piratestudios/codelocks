@@ -45,6 +45,16 @@ Codelocks.access_key = "argh"
 
 API documentation with information on methods is [available on RubyDoc.info](http://www.rubydoc.info/github/kansohq/codelocks/master).
 
+## Tests
+
+The test suite can be run locally using the following commands:
+
+```
+$ cp .env.test .env
+$ dotenv
+$ bundle exec rspec
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/codelocks/fork )
