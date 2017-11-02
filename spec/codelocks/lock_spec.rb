@@ -1,17 +1,19 @@
 require "spec_helper"
 
 describe Codelocks::Lock do
-  describe ".all" do
-    subject { Codelocks::Lock.all }
+  let(:client) do
+    Codelocks::Client.new(
+      base_uri: ENV["CODELOCKS_BASE_URI"] || "wibble",
+      api_key: ENV["CODELOCKS_API_KEY"] || "wobble"
+    )
+  end
 
-    before do
-      Codelocks.base_uri = ENV["CODELOCKS_BASE_URI"] || "wibble"
-      Codelocks.api_key = ENV["CODELOCKS_API_KEY"] || "wobble"
-    end
+  describe ".all" do
+    subject { client.locks.all }
 
     context "valid access key" do
       before do
-        Codelocks.access_key = ENV["CODELOCKS_ACCESS_KEY"] || "wubble"
+        client.access_key = ENV["CODELOCKS_ACCESS_KEY"] || "wubble"
       end
 
       around(:each) do |example|
@@ -33,7 +35,7 @@ describe Codelocks::Lock do
 
     context "invalid access key" do
       before do
-        Codelocks.access_key = "abracadabra"
+        client.access_key = "abracadabra"
       end
 
       around(:each) do |example|

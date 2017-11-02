@@ -8,7 +8,7 @@ module Codelocks
     # @return [Lock, NetCode, Request]
     attr_accessor :model
 
-    def_delegators :model, :create, :all
+    def_delegators :@model, :create, :all
 
     # Set configuration variables on instantiation
     #

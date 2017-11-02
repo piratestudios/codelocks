@@ -55,13 +55,25 @@ module Codelocks
       self
     end
 
+    # Proxy for the requests model
+    #
+    # @return [CollectionProxy]
+
     def requests
       @request_collection ||= CollectionProxy.new(model: Request, client: self)
     end
 
+    # Proxy for the netcodes model
+    #
+    # @return [CollectionProxy]
+
     def net_codes
       @net_code_collection ||= CollectionProxy.new(model: NetCode, client: self)
     end
+
+    # Proxy for the locks model
+    #
+    # @return [CollectionProxy]
 
     def locks
       @lock_collection ||= CollectionProxy.new(model: Lock, client: self)

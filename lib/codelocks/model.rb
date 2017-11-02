@@ -1,6 +1,8 @@
 module Codelocks
   class Model
-    def_delegators :class, :client
+    extend Forwardable
+
+    def_delegator :@class, :client
 
     class << self
       extend Forwardable
@@ -8,7 +10,7 @@ module Codelocks
       # @return [CollectionProxy]
       attr_accessor :collection_proxy
 
-      def_delegators :collection_proxy, :client
+      def_delegator :@collection_proxy, :client
 
       def all
         if !client.access_key
