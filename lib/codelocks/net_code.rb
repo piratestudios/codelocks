@@ -1,5 +1,5 @@
 module Codelocks
-  class NetCode
+  class NetCode < Model
     class << self
       # Predefined method for generating a new NetCode
       #
@@ -12,14 +12,14 @@ module Codelocks
       #
       # @return [Codelocks::NetCode::Response]
 
-      def generate_netcode(opts = {})
+      def create(opts = {})
         netcode = new(opts)
 
         if !netcode.identifier
           raise CodelocksError.new("Either a lock identifier or an access key must be provided")
         end
 
-        Request.create("netcode/#{netcode.lock_id}",
+        client.requests.create("netcode/#{netcode.lock_id}",
           "id": netcode.lock_id,
           "start": netcode.start_datetime,
           "duration": netcode.duration_id,
@@ -52,7 +52,7 @@ module Codelocks
     # @return [String]
 
     def identifier
-      opts[:identifier] || Codelocks.access_key
+      opts[:identifier] || client.access_key
     end
 
     # String representing the start date in YYYY-MM-DD format

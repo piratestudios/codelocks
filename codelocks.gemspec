@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "codelocks"
   spec.version       = Codelocks::VERSION
   spec.authors       = ["Robert May"]
-  spec.email         = ["robert@kanso.io"]
+  spec.email         = ["rob@piratestudios.co.uk"]
   spec.summary       = %q{A simple API wrapper for the CodeLocks API}
   spec.description   = %q{A wrapper for the CodeLocks NetCode API used to generate lock codes.}
   spec.homepage      = "http://www.codelocks.co.uk"
