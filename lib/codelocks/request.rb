@@ -1,5 +1,5 @@
 module Codelocks
-  class Request
+  class Request < Model
     class << self
       # Perform a request against the NetCode API
       #
@@ -9,14 +9,15 @@ module Codelocks
       # @return [Codelocks::NetCode::Response]
 
       def create(path, params = {})
-        response = Codelocks.connection.get(path, default_params.merge(params)) do |req|
-          req.headers['x-api-key'] = Codelocks.api_key
+        response = client.connection.get(path, default_params.merge(params)) do |req|
+          req.headers['x-api-key'] = client.api_key
         end
 
         Response.new(response)
       end
 
       private
+
       # The default params used in NetCode endpoint requests
       #
       # @return [Hash]

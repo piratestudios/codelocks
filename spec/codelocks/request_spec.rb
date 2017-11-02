@@ -1,9 +1,11 @@
 require "spec_helper"
 
 describe Codelocks::Request do
-  before do
-    Codelocks.base_uri = "http://wobble.com/"
-    Codelocks.api_key = "wibble"
+  let(:client) do
+    Codelocks::Client.new(
+      base_uri: ENV["CODELOCKS_BASE_URI"] || "wibble",
+      api_key: ENV["CODELOCKS_API_KEY"] || "wobble"
+    )
   end
 
   describe "#create" do
@@ -21,19 +23,19 @@ describe Codelocks::Request do
     let(:path) { "netcode/#{params[:id]}" }
 
     before do
-      allow(Codelocks.connection).to receive(:get) { response }
-      allow(Codelocks::Request).to receive(:default_params) { default_params }
+      allow(client.connection).to receive(:get) { response }
+      allow(client.requests.model).to receive(:default_params) { default_params }
     end
 
 
     it "performs a get request" do
-      expect(Codelocks.connection).to receive(:get).with(path, all_params)
-      Codelocks::Request.create(path, params)
+      expect(client.connection).to receive(:get).with(path, all_params)
+      client.requests.create(path, params)
     end
 
     it "returns a response object" do
       expect(
-        Codelocks::Request.create(path, params)
+        client.requests.create(path, params)
       ).to be_a(Codelocks::Response)
     end
   end
