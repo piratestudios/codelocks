@@ -1,13 +1,15 @@
 require "spec_helper"
 
 describe Codelocks::Response do
+  let(:client) do
+    Codelocks::Client.new(
+      base_uri: ENV["CODELOCKS_BASE_URI"] || "wibble",
+      api_key: ENV["CODELOCKS_API_KEY"] || "wobble"
+    )
+  end
+
   let(:response) { Codelocks::Response.new(faraday_response) }
   let(:faraday_response) { double('faraday_response', success?: true, body: '{"test": "thing"}') }
-
-  before do
-    Codelocks.base_uri = "http://wobble.com/"
-    Codelocks.api_key = "wibble"
-  end
 
   describe "#initialize" do
     it "sets the response instance variable" do

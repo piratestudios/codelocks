@@ -2,7 +2,11 @@ module Codelocks
   class Model
     extend Forwardable
 
-    def_delegator :@class, :client
+    # @return [Client]
+
+    def client
+      self.class.client
+    end
 
     class << self
       extend Forwardable

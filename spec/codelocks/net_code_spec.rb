@@ -1,18 +1,20 @@
 require "spec_helper"
 
 describe Codelocks::NetCode do
-  describe ".generate_netcode" do
+  let(:client) do
+    Codelocks::Client.new(
+      base_uri: ENV["CODELOCKS_BASE_URI"] || "wibble",
+      api_key: ENV["CODELOCKS_API_KEY"] || "wobble",
+      access_key: ENV["CODELOCKS_ACCESS_KEY"] || "wubble"
+    )
+  end
+
+  describe ".create" do
     let(:lock_id) { nil }
     let(:start_time) { Time.now }
     let(:duration) { 1 }
 
-    subject { Codelocks::NetCode.generate_netcode(lock_id: lock_id, start_time: start_time, duration: duration) }
-
-    before do
-      Codelocks.base_uri = ENV["CODELOCKS_BASE_URI"] || "wibble"
-      Codelocks.api_key = ENV["CODELOCKS_API_KEY"] || "wobble"
-      Codelocks.access_key = ENV["CODELOCKS_ACCESS_KEY"] || "wubble"
-    end
+    subject { client.net_codes.create(lock_id: lock_id, start_time: start_time, duration: duration) }
 
     context "valid lock ID" do
       let(:lock_id) { ENV["CODELOCKS_LOCK_ID"] || "valid" }

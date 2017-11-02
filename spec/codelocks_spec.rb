@@ -1,19 +1,26 @@
 require "spec_helper"
 
 describe Codelocks do
+  subject(:client) do
+    Codelocks::Client.new(
+      base_uri: ENV["CODELOCKS_BASE_URI"] || "wibble",
+      api_key: ENV["CODELOCKS_API_KEY"] || "wobble"
+    )
+  end
+
   describe "#base_uri" do
-    subject { Codelocks.base_uri }
+    subject { client.base_uri }
 
     before { allow(ENV).to receive(:[]) { nil } }
 
     context "is present" do
-      before { Codelocks.base_uri = "test" }
+      before { client.base_uri = "test" }
 
       it { is_expected.to eq("test") }
     end
 
     context "is not present" do
-      before { Codelocks.base_uri = nil }
+      before { client.base_uri = nil }
 
       it "raises an exception" do
         expect { subject }.to raise_error(Codelocks::CodelocksError)
@@ -22,18 +29,18 @@ describe Codelocks do
   end
 
   describe "#api_key" do
-    subject { Codelocks.api_key }
+    subject { client.api_key }
 
     before { allow(ENV).to receive(:[]) { nil } }
 
     context "is present" do
-      before { Codelocks.api_key = "test" }
+      before { client.api_key = "test" }
 
       it { is_expected.to eq("test") }
     end
 
     context "is not present" do
-      before { Codelocks.api_key = nil }
+      before { client.api_key = nil }
 
       it "raises an exception" do
         expect { subject }.to raise_error(Codelocks::CodelocksError)
@@ -42,18 +49,18 @@ describe Codelocks do
   end
 
   describe "#access_key" do
-    subject { Codelocks.access_key }
+    subject { client.access_key }
 
     before { allow(ENV).to receive(:[]) { nil } }
 
     context "is present" do
-      before { Codelocks.access_key = "test" }
+      before { client.access_key = "test" }
 
       it { is_expected.to eq("test") }
     end
 
     context "is not present" do
-      before { Codelocks.access_key = nil }
+      before { client.access_key = nil }
 
       it { is_expected.to eq(nil) }
     end
@@ -61,7 +68,7 @@ describe Codelocks do
 
 
   describe "#connection" do
-    subject { Codelocks.connection }
+    subject { client.connection }
 
     it { is_expected.to be_a(Faraday::Connection) }
   end
