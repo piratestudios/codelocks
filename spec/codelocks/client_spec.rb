@@ -66,10 +66,27 @@ describe Codelocks::Client do
     end
   end
 
-
   describe "#connection" do
     subject { client.connection }
 
     it { is_expected.to be_a(Faraday::Connection) }
+  end
+
+  describe "#requests" do
+    subject { client.requests }
+
+    it { is_expected.to be_a(Codelocks::CollectionProxy) }
+  end
+
+  describe "#net_codes" do
+    subject { client.net_codes }
+
+    it { is_expected.to be_a(Codelocks::CollectionProxy) }
+  end
+
+  describe "#locks" do
+    subject { client.locks }
+
+    it { is_expected.to be_a(Codelocks::CollectionProxy) }
   end
 end
