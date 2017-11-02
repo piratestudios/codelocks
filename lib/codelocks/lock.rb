@@ -1,17 +1,15 @@
 module Codelocks
-  class Lock
+  class Lock < Model
     class << self
       # Fetch a list of locks. Requires the access key env var to be set
       #
       # @return [Codelocks::NetCode::Response]
 
       def all
-        if !Codelocks.access_key
-          raise CodelocksError.new("An access key must be provided")
-        end
+        super
 
-        Request.create("lock",
-          "accesskey": Codelocks.access_key
+        client.requests.create("lock",
+          "accesskey": client.access_key
         )
       end
     end
