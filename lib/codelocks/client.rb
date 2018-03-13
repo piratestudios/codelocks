@@ -34,7 +34,6 @@ module Codelocks
     def connection
       @connection ||= Faraday.new(url: base_uri) do |faraday|
         faraday.request  :url_encoded
-        faraday.response :logger
         faraday.adapter  Faraday.default_adapter
       end
     end
