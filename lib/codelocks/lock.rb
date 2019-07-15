@@ -8,7 +8,7 @@ module Codelocks
       def all
         super
 
-        client.requests.create("lock",
+        client.requests.create("k3connect",
           "accesskey": client.access_key
         )
       end
