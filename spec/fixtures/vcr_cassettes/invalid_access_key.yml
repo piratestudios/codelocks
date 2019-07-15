@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: "<BASE_URI>/lock?accesskey=<ACCESS_KEY>"
+    uri: "<BASE_URI>/k3connect?accesskey=<ACCESS_KEY>"
     body:
       encoding: US-ASCII
       string: ''
